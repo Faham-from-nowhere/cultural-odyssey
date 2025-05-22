@@ -328,8 +328,8 @@ elif section == "Contact Us":
     st.header("\U0001F4E9 Contact Us")
     st.markdown("""
     ### Website Credits
+    - Pranjal Srivastava
     - Faham
-    - Pranjal
     - Kamran
 
     📧 For any queries, contact: [pranjalsrivastava014@gmail.com](mailto:pranjalsrivastava014@gmail.com)
