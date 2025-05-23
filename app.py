@@ -75,6 +75,7 @@ section = st.selectbox(
         "QNA Query",
         "Best places to visit",
         "Find Hotels Nearby",
+        "Unique Story",
         "Contact Us"
     ],
     index=0
@@ -321,8 +322,65 @@ elif section == "Find Hotels Nearby":
             st.info("No hotels found nearby.")
     else:
         st.error("Failed to fetch data from Geoapify.")
-
-
+# --- Unique Story Section ---
+elif section == "Unique Story":
+    # Change background for this section
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://img1.wsimg.com/isteam/ip/dd7bf207-c00c-4b95-a0a3-ff510508d271/houseboat.jpeg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.header("✨ Unique Cultural Stories of India")
+    
+    # Load story data
+    @st.cache_data
+    def load_story_data():
+        query = "SELECT * FROM CLEANED_TRAIN_STORYGUIDE"
+        df = pd.read_sql(query, conn)
+        # Rename columns for better readability
+        df.columns = ['festival_name', 'description', 'region', 'category', 'subcategory', 'source']
+        return df
+    
+    story_df = load_story_data()
+    
+    # Create dropdown with festival names
+    selected_festival = st.selectbox(
+        "Select a Festival to Explore its Story:",
+        sorted(story_df['festival_name'].unique()),
+        index=0
+    )
+    
+    # Display the selected festival's story
+    if selected_festival:
+        festival_info = story_df[story_df['festival_name'] == selected_festival].iloc[0]
+        
+        st.markdown(f"### {festival_info['festival_name']}")
+        st.markdown(f"**Region:** {festival_info['region']}")
+        st.markdown(f"**Category:** {festival_info['category']}")
+        st.markdown(f"**Subcategory:** {festival_info['subcategory']}")
+        
+        st.markdown("---")
+        st.subheader("The Story")
+        st.markdown(festival_info['description'])
+        
+        st.markdown("---")
+        st.caption(f"Source: {festival_info['source']}")
+        
+        # Optional: Add some decorative elements
+        st.markdown("---")
+        cols = st.columns(3)
+        with cols[1]:
+            st.markdown("🎉 **Celebrate the Diversity of India!** 🎉")
 # --- Contact Us ---
 elif section == "Contact Us":
     st.header("\U0001F4E9 Contact Us")
@@ -334,4 +392,3 @@ elif section == "Contact Us":
 
     📧 For any queries, contact: [pranjalsrivastava014@gmail.com](mailto:pranjalsrivastava014@gmail.com)
     """)
-
