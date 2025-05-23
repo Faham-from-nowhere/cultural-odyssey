@@ -111,8 +111,22 @@ if section == "Cultural Map":
         fig.update_layout(title="Cultural Hotspot Heatmap (Density)")
         st.plotly_chart(fig, use_container_width=True)
 
-# --- Tourism Stats ---
 elif section == "Tourism Stats":
+    # Set background image using CSS
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://static.toiimg.com/thumb/msid-80334120,width-748,height-499,resizemode=4,imgsize-2898008/.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.header("\U0001F4CA Tourism Stats Across India")
 
     official_df.columns = [col.strip().lower().replace(" ", "_") for col in official_df.columns]
@@ -142,8 +156,24 @@ elif section == "Tourism Stats":
     st.plotly_chart(fig, use_container_width=True)
     st.dataframe(long_df, use_container_width=True)
 
+
 # --- Sustainability Travel Score ---
 elif section == "Sustainability Travel Score":
+    # Set background image using CSS
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://www.medicaltourismco.com/wp-content/uploads/2024/03/Medical-Tourism-in-India-2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.header("\U0001F3C6 Sustainability Travel Score")
 
     vehicle = st.selectbox("What type of vehicle will you use?", ["Electric Vehicle", "Public Transport", "Bike", "Car", "Flight"])
@@ -182,8 +212,23 @@ elif section == "Sustainability Travel Score":
 
     st.progress(score / 100)
 
-# --- QNA ---
+
 elif section == "QNA Query":
+    # Set background image using CSS
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://i.pinimg.com/736x/43/6c/d0/436cd0fac97b6617bb3ca6f64f1af87b.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.header("\u2753 Ask about Tourism Places")
     user_question = st.text_input("Enter your question:")
 
@@ -212,6 +257,21 @@ elif section == "QNA Query":
 
 # --- Best Places ---
 elif section == "Best places to visit":
+    # Set background image using CSS
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://media.istockphoto.com/id/942152278/photo/gadisar-lake-at-jaisalmer-rajasthan-at-sunrise-with-ancient-temples-and-archaeological-ruins.jpg?s=612x612&w=0&k=20&c=HvhbHZ8HH_lAjAAI2pmqL4mUipyyAwy31qp5jjKQTO0=");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.header("\U0001F3DE Best Places to Visit in India")
     zones = best_places_df['zone'].dropna().unique()
     selected_zone = st.selectbox("\U0001F310 Select Zone:", sorted(zones))
@@ -270,8 +330,24 @@ elif section == "Best places to visit":
             st.write(f"**Weekly Off:** {place_info['weekly_off']}")
             st.write(f"**DSLR Allowed:** {place_info['dslr_allowed']}")
             st.write(f"**Nearby Airport:** {place_info['airport_within_50km_radius']}")
+
 # --- Find Hotels Nearby ---
 elif section == "Find Hotels Nearby":
+    # Set custom background image
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/6d/14/07/anantara-plaza-nice-hotel.jpg?w=1200&h=-1&s=1");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.header("\U0001F3E8 Find Hotels Near Cultural Hotspots")
 
     if 'hotspots_df' not in locals():
@@ -322,6 +398,7 @@ elif section == "Find Hotels Nearby":
             st.info("No hotels found nearby.")
     else:
         st.error("Failed to fetch data from Geoapify.")
+
 # --- Unique Story Section ---
 elif section == "Unique Story":
     # Change background for this section
@@ -383,6 +460,21 @@ elif section == "Unique Story":
             st.markdown("🎉 **Celebrate the Diversity of India!** 🎉")
 # --- Contact Us ---
 elif section == "Contact Us":
+    # Set background image
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background-image: url("https://media.istockphoto.com/id/511119416/photo/indian-landmark-gadi-sagar-in-rajasthan.jpg?s=612x612&w=0&k=20&c=dO7TbXh3sd6_QmgcF_nYi6ynyIAvPI5STavwzCDyWTI=");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.header("\U0001F4E9 Contact Us")
     st.markdown("""
     ### Website Credits
